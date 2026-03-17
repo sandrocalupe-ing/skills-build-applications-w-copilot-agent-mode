@@ -22,3 +22,21 @@ class DatabasePopulationTest(TestCase):
         self.assertEqual(Activity.objects.count(), 2)
         self.assertEqual(Team.objects.count(), 1)
         self.assertIn(str(user.id), [str(mid) for mid in team.member_ids])
+
+
+    class WorkoutTest(TestCase):
+        def test_create_and_query_workout(self):
+            from .models import Workout
+            workout = Workout.objects.create(name='Pushups', description='Upper body exercise', difficulty='Easy')
+            self.assertEqual(Workout.objects.count(), 1)
+            self.assertEqual(workout.name, 'Pushups')
+
+
+        class LeaderboardEntryTest(TestCase):
+            def test_create_and_query_leaderboard_entry(self):
+                from .models import LeaderboardEntry, UserProfile
+                user = UserProfile.objects.create(username='hero', display_name='Hero', email='hero@example.com')
+                entry = LeaderboardEntry.objects.create(user=user, score=100, rank=1)
+                self.assertEqual(LeaderboardEntry.objects.count(), 1)
+                self.assertEqual(entry.score, 100)
+                self.assertEqual(entry.rank, 1)

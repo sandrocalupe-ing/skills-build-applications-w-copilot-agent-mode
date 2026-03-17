@@ -41,3 +41,27 @@ class Team(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+    class Workout(models.Model):
+        """A workout definition for the fitness tracker."""
+        id = models.ObjectIdField(primary_key=True, editable=False)
+        name = models.CharField(max_length=200)
+        description = models.TextField(blank=True)
+        difficulty = models.CharField(max_length=50, blank=True)
+        created_at = models.DateTimeField(default=timezone.now)
+
+        def __str__(self):
+            return self.name
+
+
+        class LeaderboardEntry(models.Model):
+            """Leaderboard entry for competitive tracking."""
+            id = models.ObjectIdField(primary_key=True, editable=False)
+            user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='leaderboard_entries')
+            score = models.PositiveIntegerField(default=0)
+            rank = models.PositiveIntegerField(default=0)
+            created_at = models.DateTimeField(default=timezone.now)
+
+            def __str__(self):
+                return f"{self.user.username} - {self.score}"

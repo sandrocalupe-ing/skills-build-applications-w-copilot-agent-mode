@@ -14,6 +14,10 @@ router.register(r'users', UserProfileViewSet, basename='userprofile')
 router.register(r'activities', ActivityViewSet, basename='activity')
 router.register(r'teams', TeamViewSet, basename='team')
 
+from .views import WorkoutViewSet, LeaderboardEntryViewSet
+router.register(r'workouts', WorkoutViewSet, basename='workout')
+router.register(r'leaderboard', LeaderboardEntryViewSet, basename='leaderboardentry')
+
 
 @api_view(['GET'])
 def api_root(request, format=None):

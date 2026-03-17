@@ -22,3 +22,15 @@ class ActivityAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_at')
     search_fields = ('name',)
+
+
+    @admin.register(Workout)
+    class WorkoutAdmin(admin.ModelAdmin):
+        list_display = ('name', 'difficulty', 'created_at')
+        search_fields = ('name', 'difficulty')
+
+
+        @admin.register(LeaderboardEntry)
+        class LeaderboardEntryAdmin(admin.ModelAdmin):
+            list_display = ('user', 'score', 'rank', 'created_at')
+            search_fields = ('user__username',)

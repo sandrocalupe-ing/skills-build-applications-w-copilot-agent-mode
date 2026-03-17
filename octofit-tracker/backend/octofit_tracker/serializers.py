@@ -51,3 +51,20 @@ class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
         fields = ['id', 'name', 'member_ids', 'created_at']
+
+
+    class WorkoutSerializer(serializers.ModelSerializer):
+        id = ObjectIdField(read_only=True)
+
+        class Meta:
+            model = Workout
+            fields = ['id', 'name', 'description', 'difficulty', 'created_at']
+
+
+        class LeaderboardEntrySerializer(serializers.ModelSerializer):
+            id = ObjectIdField(read_only=True)
+            user = ObjectIdField()
+
+            class Meta:
+                model = LeaderboardEntry
+                fields = ['id', 'user', 'score', 'rank', 'created_at']
