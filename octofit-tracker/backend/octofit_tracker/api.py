@@ -7,7 +7,12 @@ from rest_framework import routers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .views import ActivityViewSet, TeamViewSet, UserProfileViewSet
+
 router = routers.DefaultRouter()
+router.register(r'users', UserProfileViewSet, basename='userprofile')
+router.register(r'activities', ActivityViewSet, basename='activity')
+router.register(r'teams', TeamViewSet, basename='team')
 
 
 @api_view(['GET'])

@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Local apps
+    'octofit_tracker',
+
     # REST API
     'rest_framework',
     'corsheaders',
@@ -81,10 +84,16 @@ WSGI_APPLICATION = 'octofit_tracker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+MONGO_URI = os.environ.get('MONGO_URI', 'mongodb://localhost:27017')
+MONGO_DB_NAME = os.environ.get('MONGO_DB_NAME', 'octofit_db')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': MONGO_DB_NAME,
+        'CLIENT': {
+            'host': MONGO_URI,
+        },
     }
 }
 
